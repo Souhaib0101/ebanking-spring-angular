@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-dark text-white d-flex justify-content-between">
+      <h5><i class="bi bi-person-lines-fill"></i> Customer Accounts</h5>
+      <button class="btn btn-sm btn-secondary" routerLink="/customers">
+        <i class="bi bi-arrow-left"></i> Back
+      </button>
+    </div>
+    <div class="card-body" *ngIf="customer">
+      <div class="alert alert-info">
+        <strong>Customer :</strong> {{customer.name}} — <strong>Email :</strong> {{customer.email}}
+      </div>
+      <p class="text-muted">Account ID: <strong>{{customerId}}</strong></p>
+      <button class="btn btn-primary" (click)="handleAccountDetails(customerId)">
+        <i class="bi bi-credit-card-2-front-fill"></i> View Account Details
+      </button>
+    </div>
+  </div>
+</div>
