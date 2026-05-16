@@ -5,10 +5,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CustomersComponent } from './customers/customers.component';
+import { NewCustomerComponent } from './new-customer/new-customer.component';
+import { AccountsComponent } from './accounts/accounts.component';
+import { CustomerAccountsComponent } from './customer-accounts/customer-accounts.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    CustomersComponent,
+    NewCustomerComponent,
+    AccountsComponent,
+    CustomerAccountsComponent
   ],
   imports: [
     BrowserModule,

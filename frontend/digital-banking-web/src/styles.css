@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #f5f7fa;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+}
+
+.page-link {
+  cursor: pointer;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.badge {
+  font-size: 0.85rem;
+}
