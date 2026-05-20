@@ -6,6 +6,9 @@ import org.sid.ebankinbackend.exceptions.BankAccountNotFoundException;
 import org.sid.ebankinbackend.services.BankAccountService;
 import org.springframework.web.bind.annotation.*;
 
+
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import java.util.List;
 
 @RestController
@@ -18,10 +21,12 @@ public class BankAccountRestAPI {
     }
 
     @GetMapping("/accounts/{accountId}")
+    @PreAuthorize("hasAuthority('SCOPE_USER')")
     public BankAccountDTO getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
         return bankAccountService.getBankAccount(accountId);
     }
     @GetMapping("/accounts")
+    @PreAuthorize("hasAuthority('SCOPE_USER')")
     public List<BankAccountDTO> listAccounts(){
         return bankAccountService.bankAccountList();
     }
@@ -31,6 +36,7 @@ public class BankAccountRestAPI {
     }
 
     @GetMapping("/accounts/{accountId}/pageOperations")
+    @PreAuthorize("hasAuthority('SCOPE_USER')")
     public AccountHistoryDTO getAccountHistory(
             @PathVariable String accountId,
             @RequestParam(name="page",defaultValue = "0") int page,
@@ -39,6 +45,7 @@ public class BankAccountRestAPI {
     }
 
     @PostMapping("/accounts/debit")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public DebitDTO debit(@RequestBody DebitDTO debitDTO) throws BankAccountNotFoundException, BalanceNotSufficientException {
         bankAccountService.debit(debitDTO.getAccountId(), debitDTO.getAmount(), debitDTO.getDescription());
         return debitDTO;
