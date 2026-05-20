@@ -87,6 +87,13 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
+    public List<CustomerDTO> searchCustomers(String keyword) {
+        return customerRepository.searchCustomers(keyword).stream()
+                .map(dtoMapper::fromCustomer)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public BankAccountDTO getBankAccount(String accountId) throws BankAccountNotFoundException {
         BankAccount bankAccount=bankAccountRepository.findById(accountId)
                 .orElseThrow(()->new BankAccountNotFoundException("BankAccount not found"));
@@ -132,9 +139,9 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public void transfer(String accountIdSource, String accountIdDestination, double amount) throws BankAccountNotFoundException, BalanceNotSufficientException {
-        debit(accountIdSource,amount,"Transfer to "+accountIdDestination);
-        credit(accountIdDestination,amount,"Transfer from "+accountIdSource);
+    public void transfer(String accountIdSource, String accountIdDestination, double amount, String description) throws BankAccountNotFoundException, BalanceNotSufficientException {
+        debit(accountIdSource, amount, description != null ? description : "Transfer to " + accountIdDestination);
+        credit(accountIdDestination, amount, description != null ? description : "Transfer from " + accountIdSource);
     }
     @Override
     public List<BankAccountDTO> bankAccountList(){
@@ -187,6 +194,9 @@ public class BankAccountServiceImpl implements BankAccountService {
         accountHistoryDTO.setCurrentPage(page);
         accountHistoryDTO.setPageSize(size);
         accountHistoryDTO.setTotalPages(accountOperations.getTotalPages());
+        accountHistoryDTO.setStatus(bankAccount.getStatus());
+        accountHistoryDTO.setCustomerDTO(dtoMapper.fromCustomer(bankAccount.getCustomer()));
+        accountHistoryDTO.setType(bankAccount instanceof SavingAccount ? "SavingAccount" : "CurrentAccount");
         return accountHistoryDTO;
     }
 

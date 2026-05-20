@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Customer } from '../model/model';
-import { CustomerService } from '../services/customer.service';
+import { Customer } from '../../model/model';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-customers',

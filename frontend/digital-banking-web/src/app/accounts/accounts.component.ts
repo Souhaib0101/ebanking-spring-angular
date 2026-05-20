@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, catchError, throwError } from 'rxjs';
-import { AccountDetails } from '../model/model';
-import { AccountsService } from '../services/account.service';
+import { AccountDetails } from '../../model/model';
+import { AccountsService } from '../../services/account.service';
 
 @Component({
   selector: 'app-accounts',
@@ -39,7 +39,7 @@ export class AccountsComponent implements OnInit {
     this.accountObservable = this.accountService.getAccount(accountId, this.currentPage, this.pageSize).pipe(
       catchError(err => {
         this.errorMessage = err.message;
-        return throwError(err);
+        return throwError(() => err);
       })
     );
   }

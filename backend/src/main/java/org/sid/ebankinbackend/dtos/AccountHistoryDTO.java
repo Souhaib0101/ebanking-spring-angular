@@ -1,6 +1,7 @@
 package org.sid.ebankinbackend.dtos;
 
 import lombok.Data;
+import org.sid.ebankinbackend.enums.AccountStatus;
 
 import java.util.List;
 
@@ -11,5 +12,8 @@ public class AccountHistoryDTO {
     private int currentPage;
     private int totalPages;
     private int pageSize;
+    private String type;
+    private AccountStatus status;
+    private CustomerDTO customerDTO;
     private List<AccountOperationDTO> accountOperationDTOS;
 }
